@@ -1,14 +1,14 @@
 package brick.balls;
 
-import brick.controllers.MainController;
+import brick.util.Brick;
 import brick.util.Point;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Circle;
-import javafx.scene.shape.Line;
 import javafx.scene.shape.Rectangle;
 
 public abstract class Ball extends Circle {
 
+    double dx, dy;
     private double theta;
 
     public Ball(double centerX, double centerY, double radius, Paint fill, double theta) {
@@ -60,7 +60,13 @@ public abstract class Ball extends Circle {
         return theta;
     }
 
+    public void increaseSpeed(double val)
+    {
+        dx += val;
+        dy += val;
+    }
+
     abstract void move();
 
-    abstract void onHit();
+    abstract void onHit(Brick brick);
 }

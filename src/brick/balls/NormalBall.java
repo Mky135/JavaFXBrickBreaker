@@ -8,12 +8,13 @@ import java.util.ArrayList;
 
 public class NormalBall extends Ball{
 
-    private double dx = .5, dy = .5;
     private Board board;
     private int damage;
 
     public NormalBall(int centerX, int centerY, double theta, int damage, Board board) {
         super(centerX, centerY, 5, Paint.valueOf("White"), theta);
+        dx = .5;
+        dy = .5;
         dx *= Math.cos(getTheta());
         dy *= -Math.sin(getTheta());
         this.board = board;
@@ -23,11 +24,11 @@ public class NormalBall extends Ball{
 
     @Override
     public void move() {
-        if(getCenterY() - getRadius() <= 0 || getCenterY() + getRadius() >= 550)
+        if(getCenterY() - getRadius() <= 0 || getCenterY() + getRadius() >= board.height())
             dy = -dy;
 
 
-        if(getCenterX() - getRadius() <= 0 || getCenterX() + getRadius() >= 400)
+        if(getCenterX() - getRadius() <= 0 || getCenterX() + getRadius() >= board.width())
             dx = -dx;
 
         ArrayList<Brick> bricks = board.getZone(this);
@@ -36,11 +37,11 @@ public class NormalBall extends Ball{
 
                 if(collidedBottom(brick) || collidedTop(brick)) {
                     dy = -dy;
-                    brick.hit(damage);
+                    onHit(brick);
                 }
                 else if(collidedLeft(brick) || collidedRight(brick)) {
                     dx = -dx;
-                    brick.hit(damage);
+                    onHit(brick);
                 }
         }
 
@@ -48,9 +49,8 @@ public class NormalBall extends Ball{
         setCenterY(getCenterY() + dy);
     }
 
-
     @Override
-    void onHit() {
-
+    void onHit(Brick brick) {
+        brick.hit(damage);
     }
 }

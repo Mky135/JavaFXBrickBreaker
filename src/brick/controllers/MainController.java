@@ -1,9 +1,7 @@
 package brick.controllers;
 
-import brick.Main;
 import brick.balls.NormalBall;
 import brick.util.Board;
-import brick.util.Brick;
 import javafx.animation.AnimationTimer;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -28,7 +26,7 @@ public class MainController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
-        Board gameBoard = new Board(10, 10, board, scoreLabel);
+        Board gameBoard = new Board(10, board, scoreLabel);
 
         animation_timer = new AnimationTimer()
         {
