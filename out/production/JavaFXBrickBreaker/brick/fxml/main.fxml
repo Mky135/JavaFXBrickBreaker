@@ -1,11 +1,35 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.text.*?>
 
 <AnchorPane prefHeight="600.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="brick.controllers.MainController">
    <children>
-      <AnchorPane fx:id="score" prefHeight="50.0" prefWidth="400.0" style="-fx-background-color: black;" />
+      <AnchorPane fx:id="score" prefHeight="50.0" prefWidth="400.0" style="-fx-background-color: black; -fx-border-color: yellow;">
+         <children>
+            <Label fx:id="scoreLabel" alignment="TOP_LEFT" graphicTextGap="0.0" layoutX="14.0" layoutY="12.0" text="Score: ">
+               <textFill>
+                  <RadialGradient centerX="0.5" centerY="0.4666666666666667" focusAngle="126.87" focusDistance="0.627906976744186" radius="0.6046511627906976">
+                     <stops>
+                        <Stop>
+                           <color>
+                              <Color red="1.0" green="0.8833333253860474" />
+                           </color>
+                        </Stop>
+                        <Stop offset="1.0">
+                           <color>
+                              <Color red="1.0" green="1.0" blue="1.0" />
+                           </color>
+                        </Stop>
+                     </stops>
+                  </RadialGradient>
+               </textFill>
+               <font>
+                  <Font name="Bungee Inline" size="24.0" />
+               </font></Label>
+         </children></AnchorPane>
       <AnchorPane fx:id="board" layoutY="50.0" prefHeight="550.0" prefWidth="400.0" style="-fx-background-color: black;" />
    </children>
 </AnchorPane>
