@@ -4,6 +4,8 @@ import brick.util.Board;
 import brick.util.Brick;
 import javafx.scene.paint.Paint;
 
+import java.util.ArrayList;
+
 public class NormalBall extends Ball{
 
     private double dx = .5, dy = .5;
@@ -28,8 +30,9 @@ public class NormalBall extends Ball{
         if(getCenterX() - getRadius() <= 0 || getCenterX() + getRadius() >= 400)
             dx = -dx;
 
-        for (int i = 0; i < board.getBricks().size(); i++) {
-                Brick brick = board.getBricks().get(i);
+        ArrayList<Brick> bricks = board.getZone(this);
+        for (int i = 0; i < bricks.size(); i++) {
+                Brick brick = bricks.get(i);
 
                 if(collidedBottom(brick) || collidedTop(brick)) {
                     dy = -dy;
