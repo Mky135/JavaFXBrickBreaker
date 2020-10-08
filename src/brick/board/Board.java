@@ -1,29 +1,28 @@
-package brick.util;
+package brick.board;
 
 import brick.balls.Ball;
 import brick.balls.NormalBall;
+import brick.util.Brick;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.paint.Paint;
 
 import java.util.ArrayList;
 import java.util.Random;
 
 public class Board {
 
-    private final ArrayList<Brick> zone1;
-    private final ArrayList<Brick> zone2;
-    private final ArrayList<Brick> zone3;
-    private final ArrayList<Brick> zone4;
-    private final ArrayList<Brick> bricks;
-    private final int amountOfBricks;
-    private AnchorPane board;
-    private Random r = new Random();
-    private ArrayList<NormalBall> normalBalls;
-    private Label scoreLabel;
+    private ArrayList<Brick> zone1;
+    private ArrayList<Brick> zone2;
+    private ArrayList<Brick> zone3;
+    private ArrayList<Brick> zone4;
+    private final ArrayList<ArrayList<Brick>> bricks;
+    private final AnchorPane board;
+    private final Random r = new Random();
+    private final ArrayList<NormalBall> normalBalls;
+    private final Label scoreLabel;
     private int score = 0;
 
-    public Board(int amountOfBricks, AnchorPane board, Label scoreLabel) {
+    public Board(AnchorPane board, Label scoreLabel, String boardXml) {
         bricks = new ArrayList<>();
         zone1 = new ArrayList<>();
         zone2 = new ArrayList<>();
@@ -33,41 +32,35 @@ public class Board {
 
         this.board = board;
         this.scoreLabel = scoreLabel;
-        this.amountOfBricks = amountOfBricks;
-
-        for (int i = 0; i < amountOfBricks; i++) {
-            Brick brick = new Brick(r.nextInt((int) board.getPrefWidth() - 30), r.nextInt((int) (board.getPrefHeight() - 15)),
-                    30, 15, 10, this);
-            brick.setFill(Paint.valueOf("Yellow"));
-            bricks.add(brick);
-        }
 
         normalBalls.add(new NormalBall(r.nextInt((int) board.getPrefWidth() - 10) + 5, r.nextInt((int) board.getPrefHeight() - 10) + 5, r.nextDouble() * Math.PI + .01, 10, this));
 
-        setBoard();
+        setBoard(boardXml);
         updateScore();
-        setZones();
-    }
-
-    public void setZones() {
-        for (Brick brick : bricks) {
-            if (brick.getX() <= board.getPrefWidth() / 2 && brick.getY() <= board.getPrefHeight() / 2)
-                zone1.add(brick);
-            else if (brick.getX() > board.getPrefWidth() / 2 && brick.getY() <= board.getPrefHeight() / 2)
-                zone2.add(brick);
-            else if (brick.getX() <= board.getPrefWidth() / 2 && brick.getY() > board.getPrefHeight() / 2)
-                zone3.add(brick);
-            else
-                zone4.add(brick);
-        }
     }
 
     public void setBoard() {
-        board.getChildren().addAll(bricks);
-        board.getChildren().addAll(normalBalls);
-        for (Brick brick : bricks) {
-            board.getChildren().add(brick.getLife());
+        for (ArrayList<Brick> brickArray: bricks) {
+            for (Brick brick : brickArray) {
+                board.getChildren().add(brick);
+                board.getChildren().add(brick.getLife());
+            }
         }
+        board.getChildren().addAll(normalBalls);
+    }
+
+    public void setBoard(String xml)
+    {
+        BrickPlacer brickPlacer = new BrickPlacer(xml, this);
+        zone1 = brickPlacer.getZone1();
+        zone2 = brickPlacer.getZone2();
+        zone3 = brickPlacer.getZone3();
+        zone4 = brickPlacer.getZone4();
+        bricks.add(zone1);
+        bricks.add(zone2);
+        bricks.add(zone3);
+        bricks.add(zone4);
+        setBoard();
     }
 
     public ArrayList<Brick> getZone(Ball ball) {
@@ -82,8 +75,6 @@ public class Board {
     }
 
     public void destroyBrick(Brick brick) {
-        bricks.remove(brick);
-
         if (zone1.contains(brick))
             zone1.remove(brick);
         else if (zone2.contains(brick))
@@ -107,16 +98,8 @@ public class Board {
         zone3.clear();
         zone4.clear();
 
-        for (int i = 0; i < amountOfBricks; i++) {
-            Brick brick = new Brick(r.nextInt((int) board.getPrefWidth() - 30), r.nextInt((int) (board.getPrefHeight() - 15)),
-                    30, 15, 10, this);
-            brick.setFill(Paint.valueOf("Yellow"));
-            bricks.add(brick);
-        }
-
         setBoard();
         updateScore();
-        setZones();
     }
 
     public void addToScore(int n) {

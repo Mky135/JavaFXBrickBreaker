@@ -9,7 +9,7 @@ import javafx.scene.shape.Rectangle;
 public abstract class Ball extends Circle {
 
     double dx, dy;
-    private double theta;
+    private final double theta;
 
     public Ball(double centerX, double centerY, double radius, Paint fill, double theta) {
         super(centerX, centerY, radius, fill);

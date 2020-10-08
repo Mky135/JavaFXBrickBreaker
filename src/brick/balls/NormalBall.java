@@ -1,6 +1,6 @@
 package brick.balls;
 
-import brick.util.Board;
+import brick.board.Board;
 import brick.util.Brick;
 import javafx.scene.paint.Paint;
 
@@ -8,8 +8,8 @@ import java.util.ArrayList;
 
 public class NormalBall extends Ball{
 
-    private Board board;
-    private int damage;
+    private final Board board;
+    private final int damage;
 
     public NormalBall(int centerX, int centerY, double theta, int damage, Board board) {
         super(centerX, centerY, 5, Paint.valueOf("White"), theta);

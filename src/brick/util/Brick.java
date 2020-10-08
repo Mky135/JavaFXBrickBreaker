@@ -1,21 +1,24 @@
 package brick.util;
 
+import brick.board.Board;
 import javafx.scene.control.Label;
+import javafx.scene.paint.Paint;
 import javafx.scene.shape.Rectangle;
 
 public class Brick extends Rectangle {
 
-    private Label life;
+    private final Label life;
     private int lifeForce;
-    private Board board;
+    private final Board board;
 
-    public Brick(int x, int y, int width, int height, int lifeForce, Board board)
+    public Brick(int x, int y, int lifeForce, Board board)
     {
-        super(x,y,width,height);
+        super(x,y,30,15);
+        setFill(Paint.valueOf("Yellow"));
         this.board = board;
         this.lifeForce = lifeForce;
         life = new Label(String.valueOf(lifeForce));
-        life.setLayoutX(x + (double) (width/2) - 4);
+        life.setLayoutX(x + 11.0);
         life.setLayoutY(y - 1);
     }
 
