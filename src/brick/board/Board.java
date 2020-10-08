@@ -20,7 +20,9 @@ public class Board {
     private final Random r = new Random();
     private final ArrayList<NormalBall> normalBalls;
     private final Label scoreLabel;
+
     private int score = 0;
+    private String boardXml;
 
     public Board(AnchorPane board, Label scoreLabel, String boardXml) {
         bricks = new ArrayList<>();
@@ -32,6 +34,7 @@ public class Board {
 
         this.board = board;
         this.scoreLabel = scoreLabel;
+        this.boardXml = boardXml;
 
         normalBalls.add(new NormalBall(r.nextInt((int) board.getPrefWidth() - 10) + 5, r.nextInt((int) board.getPrefHeight() - 10) + 5, r.nextDouble() * Math.PI + .01, 10, this));
 
@@ -86,7 +89,7 @@ public class Board {
         board.getChildren().remove(brick.getLife());
         board.getChildren().remove(brick);
 
-        if(bricks.size() == 0)
+        if(zone1.size() == 0 && zone2.size() == 0 && zone3.size() == 0 && zone4.size() == 0)
             newBoard();
     }
 
@@ -98,7 +101,7 @@ public class Board {
         zone3.clear();
         zone4.clear();
 
-        setBoard();
+        setBoard(boardXml.substring(0, boardXml.length()-5) + (r.nextInt(1)+1) + ".xml");
         updateScore();
     }
 
