@@ -8,17 +8,17 @@ import javafx.scene.shape.Rectangle;
 public class Brick extends Rectangle {
 
     private final Label life;
-    private int lifeForce;
+    private double lifeForce;
     private final Board board;
 
-    public Brick(int x, int y, int lifeForce, Board board)
+    public Brick(int x, int y, double lifeForce, Board board)
     {
         super(x,y,30,15);
         setFill(Paint.valueOf("Yellow"));
         this.board = board;
         this.lifeForce = lifeForce;
         life = new Label(String.valueOf(lifeForce));
-        life.setLayoutX(x + 11.0);
+        life.setLayoutX(x + 2);
         life.setLayoutY(y - 1);
     }
 
@@ -36,7 +36,7 @@ public class Brick extends Rectangle {
 
         if(lifeForce <= 0)
         {
-            board.addToScore(damage + lifeForce);
+            board.addToScore((int) (damage + lifeForce));
             board.destroyBrick(this);
         }
         else

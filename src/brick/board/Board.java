@@ -36,7 +36,7 @@ public class Board {
         this.scoreLabel = scoreLabel;
         this.boardXml = boardXml;
 
-        normalBalls.add(new NormalBall(r.nextInt((int) board.getPrefWidth() - 10) + 5, r.nextInt((int) board.getPrefHeight() - 10) + 5, r.nextDouble() * Math.PI + .01, 10, this));
+        normalBalls.add(new NormalBall(r.nextInt((int) board.getPrefWidth() - 10) + 5, r.nextInt((int) board.getPrefHeight() - 10) + 5, r.nextDouble() * Math.PI + .01, 1, this));
 
         setBoard(boardXml);
         updateScore();

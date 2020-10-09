@@ -8,8 +8,10 @@ import javafx.scene.shape.Rectangle;
 
 public abstract class Ball extends Circle {
 
+    public static final int NUM_OF_BALL_TYPES = 1;
     double dx, dy;
     private final double theta;
+    double damage;
 
     public Ball(double centerX, double centerY, double radius, Paint fill, double theta) {
         super(centerX, centerY, radius, fill);
@@ -64,6 +66,11 @@ public abstract class Ball extends Circle {
     {
         dx += val;
         dy += val;
+    }
+
+    public void increaseDamage(double num)
+    {
+        damage += num;
     }
 
     abstract void move();

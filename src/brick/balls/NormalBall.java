@@ -9,9 +9,8 @@ import java.util.ArrayList;
 public class NormalBall extends Ball{
 
     private final Board board;
-    private final int damage;
 
-    public NormalBall(int centerX, int centerY, double theta, int damage, Board board) {
+    public NormalBall(int centerX, int centerY, double theta, double damage, Board board) {
         super(centerX, centerY, 5, Paint.valueOf("White"), theta);
         dx = .5;
         dy = .5;
@@ -34,7 +33,7 @@ public class NormalBall extends Ball{
         ArrayList<Brick> bricks = board.getZone(this);
         for (int i = 0; i < bricks.size(); i++) {
                 Brick brick = bricks.get(i);
-
+                //TODO: Solve corner Collision
                 if(collidedBottom(brick) || collidedTop(brick)) {
                     dy = -dy;
                     onHit(brick);
@@ -51,6 +50,6 @@ public class NormalBall extends Ball{
 
     @Override
     void onHit(Brick brick) {
-        brick.hit(damage);
+        brick.hit((int) damage);
     }
 }
