@@ -68,8 +68,8 @@ public class BrickPlacer {
             Node node = brickNodes.item(i);
             if (node.getNodeType() == Node.ELEMENT_NODE) {
                 Element element = (Element) node;
-                int x = Integer.parseInt(element.getElementsByTagName("x").item(0).getTextContent());
-                int y = Integer.parseInt(element.getElementsByTagName("y").item(0).getTextContent());
+                double x = Double.parseDouble(element.getElementsByTagName("x").item(0).getTextContent());
+                double y = Double.parseDouble(element.getElementsByTagName("y").item(0).getTextContent());
                 int startingLife = Integer.parseInt(element.getElementsByTagName("startingLife").item(0).getTextContent());
                 bricks.add(new Brick(x, y, startingLife, board));
             }

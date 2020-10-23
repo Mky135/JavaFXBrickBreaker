@@ -11,7 +11,7 @@ public class Brick extends Rectangle {
     private double lifeForce;
     private final Board board;
 
-    public Brick(int x, int y, double lifeForce, Board board)
+    public Brick(double x, double y, double lifeForce, Board board)
     {
         super(x,y,30,15);
         setFill(Paint.valueOf("Yellow"));
